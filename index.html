@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO / EEAT Meta Tags -->
+  <title>Liquid Staking — How It Works, Rewards, APY/APR, Risks, Comparisons &amp; Troubleshooting (2026)</title>
+  <meta name="description" content="Liquid staking guide (2026): how liquid staking works, what drives rewards, APY vs APR explained, how to use step-by-step, LST mechanics, rebasing vs reward-bearing tokens, minimum amounts, calculator framework, risks, safety checks, comparisons vs native staking, and troubleshooting. Includes KPIs, runbook, and a deep FAQ.">
+  <meta name="author" content="Crypto Finance Experts">
+  <link rel="canonical" href="https://lido-liquid-staking.example.com/">
+
+  <link rel="icon" type="image/png" href="lido.staking.logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://lido-liquid-staking.example.com/">
+  <meta property="og:title" content="Liquid Staking — How It Works, Rewards, APY/APR, Risks, Comparisons &amp; Troubleshooting (2026)">
+  <meta property="og:description" content="Practical liquid staking guide: how LSTs work, APY/APR, rebasing vs reward-bearing tokens, risks, comparisons, and troubleshooting.">
+  <meta property="og:image" content="cover.png">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lido-liquid-staking.example.com/">
+  <meta property="twitter:title" content="Liquid Staking — Rewards, APY/APR, LST Mechanics, Risks &amp; Comparisons (2026)">
+  <meta property="twitter:description" content="How liquid staking works, LST mechanics, peg risks, APY/APR, DeFi composability, best practices, and risks in 2025–2026.">
+  <meta property="twitter:image" content="cover.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Liquid Staking — How It Works, Rewards, APY/APR, Risks, Comparisons & Troubleshooting (2026)",
+    "description": "Comprehensive guide to liquid staking: LST mechanics, APY vs APR, rebasing vs reward-bearing tokens, peg risk, DeFi composability, and troubleshooting.",
+    "author": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "publisher": { "@type": "Organization", "name": "Crypto Finance Experts" },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-03-01"
+  }
+  </script>
+
+  <style>
+    :root{
+      /* Fuchsia–Magenta Theme */
+      --primary:#D946EF;
+      --primary-600:#C026D3;
+      --primary-700:#A21CAF;
+      --accent:#F0ABFC;
+
+      --ink:#FDF4FF;
+      --muted:#A1A1AA;
+      --muted-2:#71717A;
+
+      --bg:#0A0210;
+      --panel:#0F0318;
+      --panel-2:#140520;
+      --line:rgba(255,255,255,.08);
+
+      --ok:#34D399;
+      --warn:#F59E0B;
+      --error:#F87171;
+
+      --shadow:0 12px 32px rgba(0,0,0,.55);
+      --radius:14px;
+      --radius-sm:10px;
+      --radius-lg:20px;
+      --gap:1.25rem;
+      --gap-lg:2rem;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--muted);
+      background:var(--bg);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a{color:var(--primary);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+
+    h1,h2,h3,h4{color:var(--ink);line-height:1.25;margin:0 0 .6rem}
+    h1{
+      font-size:clamp(2rem,4.5vw,3.1rem);
+      font-weight:800;
+      letter-spacing:-.2px;
+    }
+    h2{
+      font-size:clamp(1.35rem,2.8vw,2rem);
+      margin-top:2.2rem;
+      padding-top:.6rem;
+      border-top:1px solid var(--line);
+    }
+    h3{font-size:clamp(1.05rem,2.2vw,1.3rem);color:#F5D0FE}
+
+    p,li,td,th{font-size:1rem}
+    .lead{font-size:1.125rem;color:#FAE8FF}
+    .muted{color:var(--muted)}
+    .muted-2{color:var(--muted-2)}
+
+    header.hero{
+      padding:clamp(2rem,6vw,4rem) 0;
+      border-bottom:1px solid var(--line);
+    }
+    .hero-grid{
+      display:grid;
+      gap:var(--gap-lg);
+      grid-template-columns:1fr;
+      align-items:stretch;
+    }
+    .hero-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:clamp(1rem,3vw,1.75rem);
+      box-shadow:var(--shadow);
+    }
+
+    .brand-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem}
+    .brand-logo{
+      width:54px;height:54px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(217,70,239,.08);
+      padding:.35rem;
+      object-fit:contain;
+      box-shadow:0 6px 16px rgba(0,0,0,.30);
+      flex:0 0 auto;
+    }
+
+    /* ── SINGLE CTA ── */
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      background:var(--primary);
+      color:#fff;
+      padding:1rem 2.5rem;
+      border-radius:12px;
+      font-weight:800;
+      font-size:1.05rem;
+      letter-spacing:.2px;
+      box-shadow:0 10px 28px rgba(217,70,239,.32);
+      border:1px solid rgba(255,255,255,.10);
+      transition:background .18s,transform .18s,box-shadow .18s;
+    }
+    .cta:hover{background:var(--primary-600);transform:translateY(-2px);box-shadow:0 16px 36px rgba(217,70,239,.44);text-decoration:none}
+
+    .note{
+      border-left:2px solid var(--primary);
+      padding:.75rem 1rem;
+      background:rgba(217,70,239,.07);
+      border-radius:0 10px 10px 0;
+      color:#FAE8FF;
+    }
+
+    section.step-guide{padding:clamp(2rem,6vw,3.5rem) 0}
+    .steps{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .step{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1.2rem;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+      transition:transform .2s ease,border-color .2s ease;
+    }
+    .step:hover{transform:translateY(-3px);border-color:rgba(217,70,239,.28)}
+    .step .icon{
+      width:48px;height:48px;border-radius:10px;
+      display:inline-grid;place-items:center;
+      background:rgba(217,70,239,.12);
+      margin-bottom:.6rem;
+      color:#F5D0FE;
+      font-weight:900;
+      border:1px solid rgba(217,70,239,.18);
+    }
+
+    main .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      margin:1.25rem 0;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+
+    .grid-2{display:grid;gap:var(--gap);grid-template-columns:1fr}
+    .pillbar{display:flex;flex-wrap:wrap;gap:.6rem;margin:.75rem 0 0}
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(217,70,239,.07);
+      padding:.4rem .65rem;
+      border-radius:999px;
+      font-weight:700;
+      color:#F5D0FE;
+    }
+
+    .toc{
+      border:1px solid var(--line);
+      background:rgba(217,70,239,.04);
+      border-radius:var(--radius);
+      padding:1rem;
+    }
+    .toc strong{color:var(--ink)}
+    .toc ul{margin:.5rem 0 0;padding-left:1.1rem}
+    .toc li{margin:.25rem 0}
+    .toc a{font-weight:700}
+
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}
+    th,td{padding:.9rem;border-bottom:1px solid var(--line)}
+    th{background:rgba(217,70,239,.09);color:var(--ink);text-align:left}
+    tr.highlight{background:rgba(217,70,239,.05)}
+    tr:hover{background:rgba(255,255,255,.02)}
+
+    .ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--error)}
+
+    .eeat{
+      background:rgba(217,70,239,.04);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+
+    .faq-item{border-bottom:1px solid var(--line);padding:.9rem 0}
+    .faq-button{
+      all:unset;display:flex;justify-content:space-between;align-items:center;
+      width:100%;cursor:pointer;padding:.3rem 0;
+    }
+    .faq-button:focus-visible{outline:2px solid var(--primary)}
+    .faq-button h3{margin:0;font-weight:800}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .faq-content.open{padding-top:.6rem}
+    .faq-plus{font-weight:900;color:var(--primary);font-size:1.2rem}
+
+    .cta-center{
+      display:flex;
+      justify-content:center;
+      margin-top:1.25rem;
+    }
+
+    .badge-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0 0}
+    .badge{
+      border:1px solid rgba(240,171,252,.20);
+      background:rgba(240,171,252,.06);
+      padding:.35rem .6rem;
+      border-radius:999px;
+      font-weight:800;
+      color:#F5D0FE;
+    }
+
+    .callout-grid{
+      display:grid;gap:var(--gap);
+      grid-template-columns:1fr;
+      margin-top:.75rem;
+    }
+    .mini{
+      background:rgba(255,255,255,.025);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:1rem;
+    }
+    .mini h3{margin-bottom:.35rem}
+    .kpi-badges{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.5rem}
+    .kpi-badges span{
+      border:1px solid rgba(217,70,239,.22);
+      background:rgba(217,70,239,.08);
+      color:#F5D0FE;
+      padding:.3rem .55rem;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    .src{
+      display:inline-flex;align-items:center;gap:.2rem;
+      font-size:.78rem;font-weight:700;
+      color:var(--primary);
+      border:1px solid rgba(217,70,239,.24);
+      background:rgba(217,70,239,.07);
+      border-radius:5px;padding:.1rem .4rem;
+      vertical-align:middle;white-space:nowrap;
+    }
+    .src:hover{background:rgba(217,70,239,.16);text-decoration:none}
+    .src::before{content:'↗ ';font-size:.7rem;opacity:.7}
+
+    /* LST flow diagram */
+    .lst-flow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin:1rem 0;
+    }
+    .lst-node{
+      background:rgba(217,70,239,.10);
+      border:1px solid rgba(217,70,239,.22);
+      border-radius:10px;
+      padding:.6rem 1rem;
+      font-size:.88rem;
+      font-weight:700;
+      color:#F5D0FE;
+      text-align:center;
+    }
+    .lst-arrow{
+      color:var(--primary);
+      font-size:1.1rem;
+      font-weight:900;
+    }
+
+    @media(min-width:860px){
+      .steps{grid-template-columns:repeat(4,1fr)}
+      .grid-2{grid-template-columns:1fr 1fr}
+      .callout-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero" role="banner">
+  <div class="container hero-grid">
+    <div class="hero-card" aria-label="Intro">
+      <div class="brand-row">
+        <img class="brand-logo" src="lido.staking.logo.png" alt="Lido Staking logo">
+        <div>
+          <div class="muted" style="font-weight:800;letter-spacing:.2px;">Operational Guide</div>
+          <div class="muted-2" style="font-size:.95rem;">LST Mechanics&nbsp;•&nbsp;APY/APR&nbsp;•&nbsp;Peg Risk&nbsp;•&nbsp;DeFi Composability&nbsp;•&nbsp;Safety</div>
+        </div>
+      </div>
+
+      <h1>Liquid Staking</h1>
+      <p class="lead">
+        A practical, security-first guide to liquid staking: how LSTs work end-to-end,
+        the difference between rebasing and reward-bearing tokens, how to read
+        <strong>APY vs APR</strong> correctly, what peg risk actually means in practice,
+        and how to avoid the operational mistakes that cost time — or funds.
+      </p>
+
+      <div class="cta-center">
+        <a href="https://lido-staking.net/" class="cta" target="_blank" rel="noopener" aria-label="Start liquid staking with Lido">
+          Start Liquid Staking &nbsp;→
+        </a>
+      </div>
+
+      <div class="note" style="margin-top:1.25rem;">
+        <strong>Core rule:</strong> A liquid staking token represents a claim on staked assets —
+        not the assets themselves. The token trades at market price, which can deviate from
+        the underlying value. Understand the peg mechanism before depositing.
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="step-guide" aria-labelledby="how-works">
+  <div class="container">
+    <h2 id="how-works">How the Liquid Staking Workflow Works: End-to-End (Deposit → Receive LST → Earn → Redeem)</h2>
+    <div class="steps" role="list">
+      <article class="step" role="listitem">
+        <div class="icon">①</div>
+        <h3>Deposit tokens into the protocol</h3>
+        <p>
+          You send tokens to an audited smart contract. The protocol pools your deposit
+          with others and delegates to a diversified set of professional validators.
+          Your deposit never touches a centralized custodian.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">②</div>
+        <h3>Receive a liquid staking token (LST)</h3>
+        <p>
+          In return you receive an LST — a tradeable on-chain token representing your share
+          of the staked pool. The LST is transferable, usable in DeFi, and does not require
+          an unbonding period to change hands.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">③</div>
+        <h3>Rewards accrue automatically</h3>
+        <p>
+          Staking rewards accumulate without manual action. Rebasing LSTs (stETH) increase
+          your token balance daily. Reward-bearing LSTs (wstETH) increase in price-per-share.
+          No gas required for compounding.
+        </p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">④</div>
+        <h3>Exit via redemption or secondary market</h3>
+        <p>
+          You can redeem LSTs via the protocol's native withdrawal queue, or sell on a
+          secondary market (DEX, aggregator) for instant liquidity. Secondary market exits
+          are subject to the LST's market price — which may trade at a small discount.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<main class="container" role="main">
+
+  <section class="card toc" aria-label="Table of Contents">
+    <strong>On this page (Liquid Staking):</strong>
+    <ul>
+      <li><a href="#overview">Overview — what liquid staking is and who it's for</a></li>
+      <li><a href="#lst-types">LST types: rebasing vs reward-bearing tokens</a></li>
+      <li><a href="#rewards">Rewards: what drives yield in liquid staking</a></li>
+      <li><a href="#apy-apr">APY / APR: how to compare correctly</a></li>
+      <li><a href="#how-to">How to use liquid staking: step-by-step tutorial</a></li>
+      <li><a href="#calculator">Calculator: net yield estimation framework</a></li>
+      <li><a href="#defi">DeFi composability: using LSTs beyond staking</a></li>
+      <li><a href="#minimum">Minimum amount required</a></li>
+      <li><a href="#yield">Yield: compounding and net return mechanics</a></li>
+      <li><a href="#review">Review: legit, trust signals, and what to watch</a></li>
+      <li><a href="#safety">Risks: peg, smart contract, and market risks</a></li>
+      <li><a href="#comparison">Comparison: liquid staking vs native delegation</a></li>
+      <li><a href="#best-practices">Best practices: high-impact, simple rules</a></li>
+      <li><a href="#troubleshooting">Troubleshooting and common issues</a></li>
+      <li><a href="#eeat">Sources and references</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </section>
+
+  <section class="card" id="overview">
+    <h2>What Liquid Staking Is and Who It's For</h2>
+    <p>
+      Liquid staking is a mechanism that lets token holders earn staking rewards
+      while retaining the ability to transfer, trade, or deploy their staked position in DeFi —
+      without waiting for an unbonding period. The protocol issues a liquid staking token (LST)
+      representing the staked position, which trades freely on secondary markets and accrues
+      rewards automatically.
+    </p>
+
+    <div class="pillbar" aria-label="Key topics">
+      <span class="pill">LST Mechanics</span>
+      <span class="pill">Auto-Compounding</span>
+      <span class="pill">Peg Risk</span>
+      <span class="pill">DeFi Composability</span>
+      <span class="pill">No Minimum</span>
+      <span class="pill">Exit Flexibility</span>
+    </div>
+
+    <div class="callout-grid" role="list">
+      <div class="mini" role="listitem">
+        <h3>Best use-case</h3>
+        <p class="muted">
+          Token holders of any balance size who want staking yield with liquidity flexibility.
+          Particularly powerful for smaller balances where gas costs make manual compounding
+          uneconomical, and for users who want to deploy their staked position in DeFi.
+        </p>
+        <div class="kpi-badges">
+          <span>Any balance</span><span>Auto-compound</span><span>Liquid exit</span>
+        </div>
+      </div>
+      <div class="mini" role="listitem">
+        <h3>Main trade-offs vs native staking</h3>
+        <p class="muted">
+          An additional smart-contract layer increases technical risk.
+          The LST trades at market price — small peg deviations are possible.
+          Protocol fees are typically slightly higher than direct validator commission.
+        </p>
+        <div class="kpi-badges">
+          <span>Extra smart-contract layer</span><span>Peg risk</span><span>Protocol fee</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>Key distinction:</strong> Liquid staking does not eliminate staking risk —
+      it replaces unbonding illiquidity with peg and smart-contract risk.
+      Understanding that trade-off is the foundation of using LSTs correctly.
+    </div>
+  </section>
+
+  <section class="card" id="lst-types">
+    <h2>LST Types: Rebasing Tokens vs Reward-Bearing Tokens</h2>
+    <p>
+      The two dominant LST designs accumulate rewards in fundamentally different ways.
+      Choosing the wrong type for your intended use case — especially DeFi deployment —
+      can create unexpected tax events or accounting complexity.
+      The technical specifications of both models are documented in
+      <a href="https://docs.lido.fi/" target="_blank" rel="noopener nofollow" class="src">Lido developer docs</a>
+      and analysed independently at
+      <a href="https://ultrasound.money/" target="_blank" rel="noopener nofollow" class="src">ultrasound.money</a>.
+    </p>
+
+    <!-- LST flow visual -->
+    <div class="lst-flow" aria-label="LST reward flow">
+      <div class="lst-node">ETH Deposited</div>
+      <span class="lst-arrow">→</span>
+      <div class="lst-node">Protocol Pools &amp; Validates</div>
+      <span class="lst-arrow">→</span>
+      <div class="lst-node">Rewards Accrue</div>
+      <span class="lst-arrow">→</span>
+      <div class="lst-node">stETH Balance ↑<br><small style="font-weight:400">(or wstETH price/share ↑)</small></div>
+    </div>
+
+    <table aria-label="Rebasing vs reward-bearing LST comparison">
+      <thead>
+        <tr><th>Property</th><th>Rebasing LST (e.g. stETH)</th><th>Reward-bearing LST (e.g. wstETH)</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>How rewards accumulate</td>
+          <td>Token balance increases daily</td>
+          <td>Price-per-share increases over time; balance is fixed</td>
+        </tr>
+        <tr>
+          <td>1 token always equals</td>
+          <td>1 ETH in backing (target)</td>
+          <td>Increasing ETH share — value grows over time</td>
+        </tr>
+        <tr class="highlight">
+          <td>DeFi compatibility</td>
+          <td class="warn">Some protocols struggle with rebasing</td>
+          <td class="ok">Preferred by most DeFi protocols</td>
+        </tr>
+        <tr>
+          <td>Tax events</td>
+          <td class="warn">Daily balance increase may trigger income recognition</td>
+          <td class="ok">Deferred — recognition typically on sale</td>
+        </tr>
+        <tr class="highlight">
+          <td>Wallet display</td>
+          <td>Balance changes daily — visually clear</td>
+          <td>Balance stays fixed — appreciation less obvious in wallet</td>
+        </tr>
+        <tr>
+          <td>Best for</td>
+          <td>Simple staking, tracking daily rewards</td>
+          <td>DeFi deployment, long-term holding, tax deferral</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Practical rule:</strong> For simple staking where you want to see daily rewards,
+      use a rebasing LST (stETH). For DeFi deployment or tax-sensitive situations,
+      use a reward-bearing LST (wstETH). Most protocols let you wrap/unwrap between the two.
+    </div>
+  </section>
+
+  <section class="card" id="rewards">
+    <h2>Rewards: What Drives Yield in Liquid Staking</h2>
+    <p>
+      Liquid staking rewards are downstream of the same protocol economics as native staking —
+      the LST layer is a distribution mechanism, not an independent yield source.
+      Protocol-level reward data is tracked by
+      <a href="https://ultrasound.money/" target="_blank" rel="noopener nofollow" class="src">ultrasound.money</a>
+      for Ethereum and independently aggregated by
+      <a href="https://l2beat.com/" target="_blank" rel="noopener nofollow" class="src">L2BEAT</a>
+      for the broader ecosystem.
+    </p>
+    <ul>
+      <li><strong>Network consensus rewards:</strong> newly issued tokens distributed to validators for attestations and block proposals — the primary source for most networks.</li>
+      <li><strong>Transaction fee inclusion:</strong> a share of priority fees (tips) captured by the validator set during block production.</li>
+      <li><strong>MEV (Maximal Extractable Value):</strong> sophisticated validators can capture additional value from transaction ordering — Lido distributes MEV rewards to stakers via smoothing pools.</li>
+      <li><strong>Protocol fee:</strong> the liquid staking protocol takes a percentage of rewards — Lido charges 10%, split between node operators and the DAO treasury.</li>
+      <li><strong>Total staked ratio:</strong> the higher the percentage of supply staked across the network, the lower the per-token reward rate due to dilution.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Rule:</strong> Net yield = (consensus rewards + fee tips + MEV) − protocol fee − gas costs.
+      For most Lido stakers in 2026, the effective net APR on ETH is approximately 3–4%.
+      Verify current rates directly from the protocol dashboard.
+    </div>
+  </section>
+
+  <section class="card" id="apy-apr">
+    <h2>APY / APR: How to Compare Without Being Misled</h2>
+    <p>
+      For auto-compounding liquid staking protocols, the APY vs APR distinction is smaller
+      than for manual-claim native staking — but still worth understanding,
+      especially when comparing across different protocols and networks.
+    </p>
+
+    <table aria-label="APY vs APR for liquid staking">
+      <thead>
+        <tr><th>Term</th><th>What it implies</th><th>Liquid staking context</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>APR</td>
+          <td>Simple annual rate — no compounding assumed</td>
+          <td>The most conservative and honest baseline for comparison</td>
+        </tr>
+        <tr>
+          <td>APY</td>
+          <td>Annualised rate with daily compounding baked in</td>
+          <td>Appropriate for rebasing LSTs that compound daily — APY ≈ APR + small compounding premium</td>
+        </tr>
+        <tr class="highlight">
+          <td>Net APR</td>
+          <td>APR after protocol fee</td>
+          <td>The only reliable cross-protocol comparison metric</td>
+        </tr>
+        <tr>
+          <td>Real yield</td>
+          <td>USD-adjusted return after token price movement</td>
+          <td>Token-denominated APY does not protect against USD depreciation of the underlying asset</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Quick check:</strong> When comparing liquid staking rates across protocols,
+      always use net APR after protocol fee. Some protocols advertise gross APY including
+      MEV and fee revenue that may not be consistent period-to-period.
+      Use <a href="https://l2beat.com/" target="_blank" rel="noopener nofollow" class="src">L2BEAT</a>
+      and protocol dashboards for independent rate verification.
+    </div>
+  </section>
+
+  <section class="card" id="how-to">
+    <h2>How to Use Liquid Staking: Step-by-Step Tutorial</h2>
+    <ol>
+      <li><strong>Verify audit status first:</strong> any liquid staking protocol without published, independent smart contract audits is a disqualifying risk — regardless of APY or TVL claims.</li>
+      <li><strong>Understand the LST type:</strong> decide whether you want a rebasing token (stETH — balance grows daily) or a reward-bearing token (wstETH — price-per-share grows). Most protocols let you choose or convert between them.</li>
+      <li><strong>Bookmark the official URL:</strong> never navigate via search results, social media, or links in messages. Use only a saved bookmark.</li>
+      <li><strong>Connect with the right wallet:</strong> hardware wallet for meaningful amounts. The protocol requests only a signing message — never a private key or seed phrase.</li>
+      <li><strong>Start with a small test deposit:</strong> verify that your LST appears in your wallet correctly, that daily reward accrual is visible (for stETH, check on-chain at <a href="https://etherscan.io/" target="_blank" rel="noopener nofollow" class="src">Etherscan</a>), and that you understand the withdrawal flow before scaling.</li>
+      <li><strong>Choose your exit method:</strong> decide in advance whether you'll use the native withdrawal queue (no peg risk) or a secondary market DEX swap (instant but subject to market price).</li>
+      <li><strong>Scale in gradually:</strong> add to your position in tranches, verifying each step.</li>
+      <li><strong>Revoke approvals after each session</strong> at <a href="https://revoke.cash/" target="_blank" rel="noopener nofollow" class="src">revoke.cash</a>.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Key principle:</strong> The withdrawal queue is the safe exit path — it guarantees redemption
+      at the underlying asset value. The secondary market DEX swap is the fast exit path —
+      convenient but subject to market price and peg deviations. Know which you're using before you need it.
+    </div>
+  </section>
+
+  <section class="card" id="calculator">
+    <h2>Calculator: Net Yield Estimation Framework</h2>
+    <p>
+      Liquid staking simplifies the yield calculation relative to manual-claim native staking —
+      there are no per-compound gas costs. But the underlying inputs still matter.
+    </p>
+
+    <table aria-label="Liquid staking calculator inputs">
+      <thead>
+        <tr><th>Input</th><th>Meaning</th><th>Why it matters</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Deposit amount</td>
+          <td>Your principal</td>
+          <td>Determines your LST share and absolute reward amount</td>
+        </tr>
+        <tr>
+          <td>Gross APR</td>
+          <td>Protocol rate before fee (consensus + tips + MEV)</td>
+          <td>The ceiling — verify from official dashboard or independent source</td>
+        </tr>
+        <tr class="highlight">
+          <td>Protocol fee %</td>
+          <td>LST protocol's cut (Lido: 10%)</td>
+          <td>Directly reduces net APR — find in official fee documentation</td>
+        </tr>
+        <tr>
+          <td>Compounding type</td>
+          <td>Auto-daily (rebasing) or price-appreciation (reward-bearing)</td>
+          <td>Both are gas-free for the holder — major advantage over native staking</td>
+        </tr>
+        <tr class="highlight">
+          <td>Withdrawal method</td>
+          <td>Native queue (at-value) vs DEX swap (at-market)</td>
+          <td>Affects exit value — secondary market may trade at small discount to NAV</td>
+        </tr>
+        <tr>
+          <td>Token USD price assumption</td>
+          <td>Expected price movement over holding period</td>
+          <td>Dominates real USD return — 3.5% APR on a +20% asset beats 12% APR on a -40% asset</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Example: $10,000 in stETH (Lido)</h3>
+        <p class="muted">Gross APR ~4% → after 10% protocol fee = 3.6% net APR. Daily auto-rebase: ~3.65% effective APY. ~$365/year in ETH terms. Zero gas, zero manual actions. If ETH appreciates 20% over the year, USD return = ~$2,365.</p>
+      </div>
+      <div class="mini">
+        <h3>Example: $500 in stETH (Lido)</h3>
+        <p class="muted">Same rate. ~$18.25/year in ETH terms. With native staking at the same rate, monthly manual claims would cost ~$5–8/month in gas — eliminating most or all of the yield at this balance size. Liquid staking wins decisively.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Takeaway:</strong> For any balance, liquid staking eliminates the gas drag on compounding
+      that makes native delegation uneconomical at smaller sizes.
+      At larger balances, the choice between LSTs and native staking narrows — model both.
+    </div>
+  </section>
+
+  <section class="card" id="defi">
+    <h2>DeFi Composability: Using LSTs Beyond Simple Staking</h2>
+    <p>
+      One of the most significant advantages of liquid staking tokens over native staking
+      is their ability to serve as productive collateral across DeFi protocols simultaneously —
+      earning staking yield plus additional DeFi yield on the same capital.
+      DeFi ecosystem data is tracked at
+      <a href="https://defillama.com/" target="_blank" rel="noopener nofollow" class="src">DeFiLlama</a>.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Collateral in lending protocols</h3>
+        <p class="muted">wstETH is accepted as collateral in Aave, Maker, and other lending protocols. You borrow stablecoins against your LST while it continues accruing staking rewards. Risk: liquidation if the LST value drops below the collateral threshold.</p>
+        <div class="kpi-badges"><span>Borrow against LST</span><span>Staking yield continues</span><span>Liquidation risk</span></div>
+      </div>
+      <div class="mini">
+        <h3>Liquidity provision in DEX pools</h3>
+        <p class="muted">LST/ETH pools on Curve or Balancer generate LP fees on top of staking yield. wstETH/ETH Curve pools are among the most liquid DeFi markets. Risk: impermanent loss if the LST trades at a persistent discount to ETH.</p>
+        <div class="kpi-badges"><span>LP fees + staking yield</span><span>High liquidity</span><span>Impermanent loss</span></div>
+      </div>
+    </div>
+
+    <div class="badge-row">
+      <span class="badge">Lending Collateral</span>
+      <span class="badge">DEX Liquidity</span>
+      <span class="badge">Yield Aggregators</span>
+      <span class="badge">Restaking Protocols</span>
+    </div>
+
+    <div class="note">
+      <strong>Risk layering warning:</strong> Each additional DeFi layer adds its own smart-contract risk,
+      liquidation risk, and complexity. DeFi composability is a feature — but stacking multiple
+      protocols on top of staking yield requires understanding each layer's risk independently.
+      Only deploy LSTs in DeFi if you understand the full risk stack.
+    </div>
+  </section>
+
+  <section class="card" id="minimum">
+    <h2>Minimum Amount Required</h2>
+    <p>
+      One of liquid staking's most practical advantages over native staking is the absence
+      of meaningful minimums. This removes a key barrier for smaller holders.
+    </p>
+    <ul>
+      <li><strong>Lido (ETH):</strong> no effective minimum — any ETH amount is accepted. Solo validator staking requires 32 ETH.</li>
+      <li><strong>Practical minimum:</strong> large enough that the transaction fees to deposit and eventually withdraw don't consume a disproportionate share of accumulated rewards.</li>
+      <li><strong>Safety minimum:</strong> always keep a native token gas reserve outside the staked position for deposit, withdrawal, and approval management transactions.</li>
+    </ul>
+
+    <p>
+      A detailed breakdown of staking minimums across all methods is maintained at
+      <a href="https://ethereum.org/en/staking/" target="_blank" rel="noopener nofollow" class="src">Ethereum.org — staking comparison</a>.
+      For very small balances (under ~$200), the deposit and withdrawal gas costs on Ethereum
+      may represent a significant fraction of the position — consider waiting until the position
+      is larger or using a lower-fee network.
+    </p>
+
+    <div class="note">
+      <strong>Rule:</strong> Liquid staking removes the minimum barrier but not the gas cost reality.
+      For very small ETH positions, wait until the balance justifies the round-trip gas cost,
+      or use an L2 deployment of the same protocol where gas is significantly cheaper.
+    </div>
+  </section>
+
+  <section class="card" id="yield">
+    <h2>Yield and Compounding: How Returns Accumulate in Liquid Staking</h2>
+    <p>
+      The compounding mechanics of liquid staking are simpler and more efficient than native staking —
+      rewards accumulate automatically without user action or gas cost. The key distinction is
+      between the two LST designs.
+    </p>
+
+    <div class="grid-2">
+      <div class="mini">
+        <h3>Rebasing LST (e.g. stETH)</h3>
+        <p class="muted">Your token balance increases daily. If you hold 1.000 stETH today, you might hold 1.00001 stETH tomorrow — the difference represents one day of staking rewards. Compounding is continuous and gas-free. Daily reward visibility makes performance tracking straightforward.</p>
+        <div class="kpi-badges"><span>Daily balance increase</span><span>Continuous compound</span><span>Gas-free</span></div>
+      </div>
+      <div class="mini">
+        <h3>Reward-bearing LST (e.g. wstETH)</h3>
+        <p class="muted">Your token balance stays fixed. The exchange rate between wstETH and ETH increases continuously as rewards accrue. You hold the same number of tokens, but each one is worth progressively more ETH. Preferred for DeFi and tax-sensitive situations.</p>
+        <div class="kpi-badges"><span>Fixed balance</span><span>Rising exchange rate</span><span>DeFi-optimized</span></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1rem;">Net yield checklist for liquid staking</h3>
+    <ul>
+      <li>Gross rewards earned (consensus + tips + MEV) — verify on-chain at any time</li>
+      <li>Minus protocol fee (Lido: 10% of gross rewards)</li>
+      <li>Minus one-time deposit and withdrawal gas costs (amortized over holding period)</li>
+      <li>Adjusted for any peg deviation on secondary market exit</li>
+      <li>Adjusted for token USD price movement over the holding period</li>
+    </ul>
+
+    <div class="note">
+      <strong>Best practice:</strong> Review net yield quarterly. Compare realized stETH balance growth
+      or wstETH exchange rate increase against the quoted APR to verify the protocol is performing
+      as expected. Any meaningful divergence warrants on-chain investigation.
+    </div>
+  </section>
+
+  <section class="card" id="review">
+    <h2>Legitimacy, Trust Signals, and What to Watch (2025–2026)</h2>
+    <p>
+      Evaluating a liquid staking protocol requires the same due diligence as any DeFi protocol,
+      with additional attention to LST-specific mechanics: peg stability history, withdrawal queue
+      management, and MEV distribution transparency.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Legitimacy signals</h3>
+        <p class="muted">
+          Multiple independent published audits with resolved findings. Transparent protocol fee.
+          DAO governance with on-chain voting history. Consistent peg maintenance over multiple
+          market cycles. Published MEV distribution methodology.
+          Independent research coverage at
+          <a href="https://banklesshq.com/" target="_blank" rel="noopener nofollow" class="src">Bankless</a>
+          and
+          <a href="https://thedefiant.io/" target="_blank" rel="noopener nofollow" class="src">The Defiant</a>.
+        </p>
+      </div>
+      <div class="mini">
+        <h3>Red flags to investigate</h3>
+        <p class="muted">
+          No published audit. Claimed APY significantly above protocol-level rates.
+          Persistent peg discount with no transparent explanation. No published MEV policy.
+          Anonymous team with no DAO governance. No documented withdrawal queue or secondary market liquidity.
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>2025/2026 threat:</strong> Fake liquid staking protocols with near-identical branding
+      to established platforms are regularly deployed during market rallies.
+      Always verify the contract address against
+      <a href="https://github.com/lidofinance/audits" target="_blank" rel="noopener nofollow" class="src">official audit reports</a>
+      before depositing — brand similarity is not contract identity.
+    </div>
+  </section>
+
+  <section class="card" id="safety">
+    <h2>Risks: Peg, Smart Contract, and Market Risks Explained</h2>
+    <p>
+      Liquid staking introduces a specific risk layer that native staking does not have:
+      the LST can trade at a price different from the underlying asset's value.
+      Understanding peg risk is unique to this category.
+    </p>
+
+    <table aria-label="Liquid staking risk factors">
+      <thead>
+        <tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Smart contract exploit</td>
+          <td class="err">Principal loss — most severe</td>
+          <td>Use protocols with multiple independent audits and established TVL; check <a href="https://github.com/lidofinance/audits" target="_blank" rel="noopener nofollow" class="src">Lido audits</a></td>
+        </tr>
+        <tr>
+          <td>LST peg deviation</td>
+          <td class="warn">Exit value below underlying value</td>
+          <td>Use native withdrawal queue for guaranteed at-value exit; avoid panic-selling during market stress</td>
+        </tr>
+        <tr class="highlight">
+          <td>Phishing / cloned UI</td>
+          <td class="err">Wallet drain — most frequent real loss</td>
+          <td>Bookmark-only navigation; verify contract address on-chain before every first interaction</td>
+        </tr>
+        <tr>
+          <td>Validator slashing</td>
+          <td class="warn">Small reduction in stETH exchange rate</td>
+          <td>Lido distributes stake across many operators — exposure per staker is minimal and socialised</td>
+        </tr>
+        <tr class="highlight">
+          <td>DeFi composability risk</td>
+          <td class="err">Liquidation if deployed as collateral</td>
+          <td>Maintain healthy collateral ratios; understand liquidation thresholds before using LSTs in DeFi</td>
+        </tr>
+        <tr>
+          <td>Token price depreciation</td>
+          <td class="err">Real USD yield turns negative</td>
+          <td>Model USD scenario; staking yield does not protect against asset price decline</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>On peg risk specifically:</strong> The stETH/ETH peg has historically remained very close
+      to 1:1, with brief deviations during stress events (e.g. the June 2022 Celsius episode).
+      During those events, users who used the native withdrawal queue received full underlying value.
+      Users who sold on the secondary market during the depeg period received less.
+      The lesson: the withdrawal queue is the safe exit; the DEX is the fast exit.
+    </div>
+  </section>
+
+  <section class="card" id="comparison">
+    <h2>Comparison: Liquid Staking vs Native Delegation</h2>
+    <p>
+      The right choice depends on balance size, liquidity needs, DeFi intent, and tolerance
+      for additional smart-contract complexity. Neither is universally superior.
+    </p>
+
+    <table aria-label="Liquid staking vs native delegation">
+      <thead>
+        <tr><th>Dimension</th><th>Native delegation</th><th>Liquid staking (e.g. Lido stETH)</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Liquidity</td>
+          <td>Lower — fixed unbonding period</td>
+          <td class="ok">Higher — LST tradeable any time, withdrawal queue for guaranteed exit</td>
+        </tr>
+        <tr>
+          <td>Compounding</td>
+          <td>Manual — gas cost and signing event required</td>
+          <td class="ok">Automatic — daily rebase, zero gas, zero signing events</td>
+        </tr>
+        <tr class="highlight">
+          <td>Minimum</td>
+          <td>32 ETH for solo Ethereum staking</td>
+          <td class="ok">None effective — any ETH amount accepted</td>
+        </tr>
+        <tr>
+          <td>Smart-contract risk</td>
+          <td class="ok">Protocol layer only</td>
+          <td>Protocol + LST contract + peg / market risk</td>
+        </tr>
+        <tr class="highlight">
+          <td>DeFi composability</td>
+          <td class="err">None — locked position</td>
+          <td class="ok">Full — use LST as collateral, in LPs, in yield aggregators</td>
+        </tr>
+        <tr>
+          <td>Fee structure</td>
+          <td>Validator commission only (~5–10%)</td>
+          <td>Protocol fee (Lido: 10%) covers validators and DAO treasury</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Decision rule:</strong> For balances under ~$10,000, liquid staking almost always
+      produces better net yield after gas and provides superior flexibility. For large balances
+      where smart-contract minimization is the priority and DeFi composability is not needed,
+      native delegation is worth the complexity trade-off.
+    </div>
+  </section>
+
+  <section class="card" id="best-practices">
+    <h2>Best Practices: High-Impact Rules for Liquid Staking</h2>
+    <ul>
+      <li><strong>Verify audit status first:</strong> no published independent audit means unquantifiable smart contract risk — the LST layer makes this even more critical than in native staking.</li>
+      <li><strong>Choose the right LST type for your intent:</strong> stETH for simple staking and daily reward visibility; wstETH for DeFi deployment and tax deferral.</li>
+      <li><strong>Bookmark every URL:</strong> never navigate to a liquid staking interface via search results, social media, or any link in a message.</li>
+      <li><strong>Verify the contract address on-chain</strong> before every first interaction — brand similarity is not contract identity.</li>
+      <li><strong>Use the native withdrawal queue</strong> for guaranteed at-value exit; only use DEX secondary markets when instant liquidity justifies the small peg risk.</li>
+      <li><strong>If deploying LSTs in DeFi, understand each layer:</strong> every additional protocol is an additional smart-contract risk and liquidation surface.</li>
+      <li><strong>Keep a gas reserve</strong> in your external wallet for deposit, withdrawal, and approval management.</li>
+      <li><strong>Revoke approvals after every session</strong> at <a href="https://revoke.cash/" target="_blank" rel="noopener nofollow" class="src">revoke.cash</a>.</li>
+      <li><strong>Track net yield quarterly</strong> — compare realized stETH balance growth or wstETH exchange rate change against the quoted APR.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Most common mistake:</strong> Using a secondary market DEX swap to exit during a brief
+      peg deviation event, locking in a small discount that would have resolved within days via the
+      native withdrawal queue. If you don't need instant liquidity, use the queue.
+    </div>
+  </section>
+
+  <section class="card" id="troubleshooting">
+    <h2>Troubleshooting: Common Issues, Root Causes, and Fixes</h2>
+
+    <h3>"My stETH balance isn't increasing"</h3>
+    <ul>
+      <li>Some wallets don't display daily stETH rebase changes automatically — verify your on-chain balance at
+        <a href="https://etherscan.io/" target="_blank" rel="noopener nofollow" class="src">Etherscan</a>
+        rather than relying on the wallet UI.</li>
+      <li>You may be holding wstETH (reward-bearing) rather than stETH (rebasing) — wstETH balance stays fixed while its ETH value grows.</li>
+      <li>Verify you connected to the correct network and wallet address.</li>
+    </ul>
+
+    <h3>"stETH is trading below ETH — should I sell?"</h3>
+    <ul>
+      <li>Minor stETH/ETH discounts (under 0.5%) are normal market microstructure and typically resolve quickly.</li>
+      <li>If you do not need immediate liquidity, use the native withdrawal queue to redeem at full underlying value — no peg discount applies.</li>
+      <li>Only sell via the secondary market (DEX) if instant liquidity is genuinely required and you accept the current market price.</li>
+    </ul>
+
+    <h3>"I can't withdraw from the Lido queue"</h3>
+    <ul>
+      <li>Ethereum withdrawal requests enter a queue — processing time varies with validator exit demand. Check the current queue status on the Lido withdrawal dashboard.</li>
+      <li>Ensure you initiated the withdrawal correctly in the app — a pending request is different from a completed one.</li>
+      <li>Insufficient gas for the withdrawal claim transaction — top up your ETH balance before claiming.</li>
+    </ul>
+
+    <h3>"My LST-backed DeFi position was liquidated"</h3>
+    <ul>
+      <li>The LST collateral value (either from peg deviation or ETH price decline) dropped below the liquidation threshold — this is a DeFi risk, not a liquid staking protocol failure.</li>
+      <li>For future positions, maintain a conservative loan-to-value ratio and set up price alerts well before the liquidation threshold.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Best debugging method:</strong> Verify all state on-chain first — protocol UIs can display stale data.
+      For stETH specifically, the Lido dashboard and Etherscan are the authoritative sources.
+    </div>
+  </section>
+
+  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
+    <h2 id="eeat-title">Authoritative Notes &amp; External References</h2>
+    <p>
+      Primary sources used throughout this guide. All links point to official protocol documentation,
+      independent research platforms, on-chain analytics tools, or established media covering DeFi economics.
+    </p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Protocol Docs &amp; On-Chain Data</h3>
+        <ul>
+          <li><a href="https://lido.fi/" target="_blank" rel="noopener nofollow">Lido Finance — Official Site</a></li>
+          <li><a href="https://docs.lido.fi/" target="_blank" rel="noopener nofollow">Lido Developer Docs — stETH &amp; wstETH Architecture</a></li>
+          <li><a href="https://github.com/lidofinance/audits" target="_blank" rel="noopener nofollow">Lido — Published Smart Contract Audits</a></li>
+          <li><a href="https://ultrasound.money/" target="_blank" rel="noopener nofollow">Ultrasound.money — Ethereum Issuance &amp; Staking Data</a></li>
+          <li><a href="https://l2beat.com/" target="_blank" rel="noopener nofollow">L2BEAT — Ethereum Ecosystem Risk &amp; TVL</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Research &amp; Security</h3>
+        <ul>
+          <li><a href="https://banklesshq.com/" target="_blank" rel="noopener nofollow">Bankless — DeFi &amp; Liquid Staking Research</a></li>
+          <li><a href="https://thedefiant.io/" target="_blank" rel="noopener nofollow">The Defiant — Independent DeFi Coverage</a></li>
+          <li><a href="https://defillama.com/" target="_blank" rel="noopener nofollow">DeFiLlama — LST TVL &amp; Protocol Metrics</a></li>
+          <li><a href="https://revoke.cash/" target="_blank" rel="noopener nofollow">Revoke.cash — Token Allowance Management</a></li>
+          <li><a href="https://ethereum.org/en/staking/" target="_blank" rel="noopener nofollow">Ethereum.org — Staking Methods Comparison</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1rem;">
+      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical SEO-oriented knowledge base covering
+      how liquid staking works: LST mechanics, rebasing vs reward-bearing tokens, peg risk,
+      DeFi composability, APY/APR, calculator framework, safety, and troubleshooting.
+    </div>
+  </section>
+
+  <section class="card faq-section" aria-labelledby="faq">
+    <h2 id="faq">Liquid Staking: Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
+        <h3>What is liquid staking and how does it work?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
+        <p>Liquid staking lets you earn staking rewards while retaining a tradeable, transferable token representing your staked position. You deposit tokens into an audited smart contract; the protocol delegates to validators and issues an LST (liquid staking token) in return. Rewards accrue automatically — either via daily balance rebase (stETH) or rising exchange rate (wstETH) — with no manual actions required.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
+        <h3>What is the difference between stETH and wstETH?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
+        <p>stETH is a rebasing token — your wallet balance increases daily to reflect accrued rewards. wstETH is a reward-bearing token — your balance stays fixed, but the exchange rate between wstETH and ETH increases over time. stETH is more intuitive for simple staking; wstETH is preferred for DeFi deployment and may be more tax-efficient in jurisdictions where daily rebase is a taxable event.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
+        <h3>What APY or APR can I expect from liquid staking?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
+        <p>For ETH via Lido, the current net APR is approximately 3–4% — after the 10% protocol fee is deducted from gross rewards (consensus rewards + tips + MEV). This varies with network conditions, total ETH staked, and MEV revenue. Verify the current rate directly from the Lido dashboard or independent sources like ultrasound.money.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
+        <h3>What is peg risk and should I be worried about it?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
+        <p>Peg risk is the possibility that an LST trades below the value of its underlying asset on secondary markets. For stETH, the peg has historically remained very close to 1:1, with brief deviations during stress events. The risk is material only if you need to exit via the secondary market during a depeg. If you use the native withdrawal queue, you receive the full underlying ETH value regardless of market price — no peg risk applies to that exit path.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
+        <h3>Is liquid staking safer than native staking?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
+        <p>It depends on the comparison. Liquid staking eliminates unbonding illiquidity and reduces manual signing events (each a phishing surface). However, it introduces an additional smart-contract layer and peg risk that native staking does not have. For most users at most balance sizes, the operational simplicity and compounding efficiency of audited liquid staking protocols outweigh the added smart-contract complexity — but the trade-off should be a conscious choice.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
+        <h3>Can I use my LST in DeFi while earning staking rewards?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
+        <p>Yes — this is one of liquid staking's core advantages. wstETH can be used as collateral in lending protocols (Aave, Maker), provided as liquidity in DEX pools (Curve, Balancer), or deployed in yield aggregators — all while continuing to accrue staking rewards. Each additional DeFi layer adds its own smart-contract risk, liquidation risk, and complexity. Only deploy LSTs in DeFi if you fully understand each layer's risk.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
+        <h3>How do I exit my liquid staking position?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
+        <p>Two paths: (1) Native withdrawal queue — submit a withdrawal request via the protocol app, wait for processing (variable time depending on validator exit demand), and receive underlying ETH at full value with no peg risk. (2) Secondary market — swap stETH for ETH on a DEX (Curve, Uniswap) for instant liquidity at the current market price, which may be slightly below the underlying value. Use the queue if time permits; use the DEX if instant liquidity is necessary.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
+        <h3>What is the minimum amount to start liquid staking?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
+        <p>Lido accepts any ETH amount — there is no effective minimum for liquid staking versus the 32 ETH requirement for solo Ethereum validator staking. Your practical minimum is the deposit size where the gas cost to deposit and eventually withdraw does not represent an unreasonable fraction of the accumulated rewards over your intended holding period.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
+        <h3>Why is my stETH balance not changing?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
+        <p>Most likely cause: your wallet app does not automatically display daily rebase changes. Verify your actual on-chain stETH balance at Etherscan by looking up your wallet address — you will see the true balance including all rebases. Alternatively, you may be holding wstETH (which has a fixed balance that appreciates in ETH value) rather than stETH. Check which token you actually hold before assuming a problem.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container" role="contentinfo" style="padding:2rem 0;border-top:1px solid var(--line);margin-top:2rem">
+  <p class="muted">© 2026 Liquid Staking Guide. Educational content with safety-first operational focus. Not financial or investment advice.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      const body = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.querySelector('.faq-plus').textContent = open ? '+' : '−';
+      body.style.maxHeight = open ? '0' : body.scrollHeight + 'px';
+      body.classList.toggle('open', !open);
+    });
+  });
+</script>
+
+</body>
+</html>
